@@ -1,0 +1,42 @@
+SET IDENTITY_INSERT DOCUMENTO ON 
+insert into DOCUMENTO (IdDocumento, TipoDocumento, Descripcion)
+values ('1', 'DNI' ,' Documento de Identidad') 
+insert into DOCUMENTO (IdDocumento, TipoDocumento, Descripcion)
+values('2', 'CE' ,' Carnet') 
+insert into DOCUMENTO (IdDocumento, TipoDocumento, Descripcion)
+values('3', 'Pasaporte' ,'Pasaporte')
+SET IDENTITY_INSERT [dbo].[DOCUMENTO] OFF
+SET IDENTITY_INSERT CODIGOP  ON
+insert into CODIGOP (IdCodigop, Codigopais, Descripcion)
+values ('1', '+51' , 'Peru') 
+insert into CODIGOP (IdCodigop, Codigopais, Descripcion)
+values('2', '+34' ,'España') 
+insert into CODIGOP (IdCodigop, Codigopais, Descripcion)
+values('3', '+46' ,'Suecia')
+insert into CODIGOP (IdCodigop, Codigopais, Descripcion)
+values('4', '+86' ,'China')
+SET IDENTITY_INSERT [dbo].[CODIGOP] OFF
+SET IDENTITY_INSERT USUARIO ON 
+insert into USUARIO	(IdUsuario, Nombre, Apellido, Correo, Clave, TipoDocumento, NumeroDocumento, CodigoPais, Telefono)
+values ('1', 'Jose', 'Rodriguez', 'joserodiguez@gmail.com', 'donpepito', 'DNI', '70308956', '+51', '963852456')
+insert into USUARIO	(IdUsuario, Nombre, Apellido, Correo, Clave, TipoDocumento, NumeroDocumento, CodigoPais, Telefono)
+values ('2', 'Rodrigo', 'Perez', 'perezrodri@gmail.com', 'donpepon', 'DNI', '70258956', '+51', '963852147')
+insert into USUARIO	(IdUsuario, Nombre, Apellido, Correo, Clave, TipoDocumento, NumeroDocumento, CodigoPais, Telefono)
+values ('3', 'Jose', 'Dominguez', 'perezpepe@gmail.com', 'donjose20', 'DNI', '70255955', '+51', '935452147')
+insert into USUARIO	(IdUsuario, Nombre, Apellido, Correo, Clave, TipoDocumento, NumeroDocumento, CodigoPais, Telefono)
+values ('4','Ore', 'Dominguez', 'perezpepe@gmail.com', 'donjose20', 'DNI', '70255955', '+51', '935452147')
+
+SET IDENTITY_INSERT [dbo].[USUARIO] OFF
+SET IDENTITY_INSERT OFERTA ON 
+insert into USUARIO	(IdOferta, NomOferta, IdCategoria, NomCategoria, IdProducto, NomProducto, Descuento, Activo)
+values ('3', 'Happy Happy', '3', 'Confiteria', '7', 'Pasas  y Mani', '0.15', 'Si')
+insert into USUARIO	(IdOferta, NomOferta, IdCategoria, NomCategoria, IdProducto, NomProducto, Descuento, Activo)
+values ('4','Precios mas bajos', '4', 'APERITIVOS', '6', 'Cheetos', '0.50', 'No')
+insert into USUARIO	(IdOferta, NomOferta, IdCategoria, NomCategoria, IdProducto, NomProducto, Descuento, Activo)
+values ('5','Hoy es el dia', '4', 'APERITIVOS', '7', 'Pringles', '0.50', 'No')
+insert into USUARIO	(IdOferta, NomOferta, IdCategoria, NomCategoria, IdProducto, NomProducto, Descuento, Activo)
+values ('6', 'Ven y Llevate todo', '2', 'Dulces', '3', 'Chocolates pepito', '0.45', 'Si')
+
+
+
+

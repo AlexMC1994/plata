@@ -14,6 +14,6 @@ namespace WebApi.Models
         public int? Telefono { get; set; }
         public string? Correocontacto { get; set; }
         public string? TipoServicio { get; set; }
-        public bool? Activo { get; set; }
+        public string? Activo { get; set; }
     }
 }

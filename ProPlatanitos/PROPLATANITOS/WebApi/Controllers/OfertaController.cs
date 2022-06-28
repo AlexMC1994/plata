@@ -12,12 +12,19 @@ namespace WebApi.Controllers
     public class OfertaController : ControllerBase
     {
 
+        [HttpGet]
+        [Route("ListarCategoria")]
+        public ICollection<CategoriumDt> ListarCategoria()
+        {
+            return Categorium.ListarCategoria();
+        }
+
 
         [HttpGet]
         [Route("BuscaOfertaID")]
-        public OfertumDt BuscaOfertaID(int id)
+        public OfertumDt ObtenOferta(int IdOferta)
         {
-            return Ofertum.BuscaOfertaID( id);
+            return Ofertum.ObtenOferta(IdOferta);
         }
 
         [HttpGet]
@@ -36,7 +43,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPut]
         [Route("ActualizaOferta")]
        public OfertumDt ActualizaOferta(int id, OfertumDt ofertumDt)
        {

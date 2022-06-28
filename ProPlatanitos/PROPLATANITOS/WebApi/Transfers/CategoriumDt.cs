@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WebApi.Models
+﻿namespace WebApi.Transfers
 {
-    public partial class Categorium
+    public class CategoriumDt
     {
         public int IdCategoria { get; set; }
         public string? Nombre { get; set; }

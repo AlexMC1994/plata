@@ -12,7 +12,6 @@ namespace WebApi.Models
         public int? IdProducto { get; set; }
         public string? NomProducto { get; set; }
         public decimal? Descuento { get; set; }
-        public bool? Activo { get; set; }
-
+        public string? Activo { get; set; }
     }
 }

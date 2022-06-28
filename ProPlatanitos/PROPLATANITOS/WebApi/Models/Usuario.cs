@@ -14,6 +14,5 @@ namespace WebApi.Models
         public string? NumeroDocumento { get; set; }
         public string? CodigoPais { get; set; }
         public int? Telefono { get; set; }
-
     }
 }

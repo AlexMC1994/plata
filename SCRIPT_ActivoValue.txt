@@ -1,0 +1,148 @@
+USE [SOAPLATANITOS]
+GO
+/****** Object:  Table [dbo].[CATEGORIA]    Script Date: 24/06/2022 01:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CATEGORIA](
+	[IdCategoria] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[Descripcion] [varchar](100) NULL,
+	[Activo] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdCategoria] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Categoriasecundaria]    Script Date: 24/06/2022 01:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categoriasecundaria](
+	[IdSubCategoria] [int] IDENTITY(1,1) NOT NULL,
+	[IdCategoria] [int] NULL,
+	[Nombre] [varchar](100) NULL,
+	[Descripcion] [varchar](100) NULL,
+	[Activo] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdSubCategoria] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MARCA]    Script Date: 24/06/2022 01:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MARCA](
+	[IdMarca] [int] IDENTITY(1,1) NOT NULL,
+	[IdProveedor] [int] NULL,
+	[Nombre] [varchar](100) NULL,
+	[Descripcion] [varchar](100) NULL,
+	[Activo] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdMarca] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[OFERTA]    Script Date: 24/06/2022 01:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[OFERTA](
+	[IdOferta] [int] IDENTITY(1,1) NOT NULL,
+	[NomOferta] [varchar](100) NULL,
+	[IdCategoria] [int] NULL,
+	[NomCategoria] [varchar](100) NULL,
+	[IdProducto] [int] NULL,
+	[NomProducto] [varchar](100) NULL,
+	[Descuento] [decimal] (10, 2) NULL,
+	[Activo] [varchar](100) NULL,
+	
+PRIMARY KEY CLUSTERED 
+(
+	[IdOferta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PRODUCTO]    Script Date: 24/06/2022 01:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PRODUCTO](
+	[IdProducto] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](500) NULL,
+	[Descripcion] [varchar](500) NULL,
+	[IdMarca] [int] NULL,
+	[IdCategoria] [int] NULL,
+	[Precio] [decimal](10, 2) NULL,
+	[Stock] [int] NULL,
+	
+PRIMARY KEY CLUSTERED 
+(
+	[IdProducto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PROVEEDOR]    Script Date: 24/06/2022 01:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PROVEEDOR](
+	[IdProveedor] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[RUC] [int] NULL,
+	[RepresentanteLegal] [varchar](100) NULL,
+	[Dirección] [varchar](100) NULL,
+	[Ciudad] [varchar](100) NULL,
+	[Telefono] [int] NULL,
+	[Correocontacto] [varchar](100) NULL,
+	[TipoServicio] [varchar](100) NULL,
+	[Activo] [varchar](100) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdProveedor] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[USUARIO]    Script Date: 24/06/2022 01:50:12 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[USUARIO](
+	[IdUsuario] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre] [varchar](100) NULL,
+	[Apellido] [varchar](100) NULL,
+	[Correo] [varchar](100) NULL,
+	[Clave] [varchar](100) NULL,
+	[TipoDocumento] [varchar](10) NULL,
+	[NumeroDocumento] [varchar](20) NULL,
+	[CodigoPais] [varchar](100) NULL,
+	[Telefono] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[IdUsuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[CATEGORIA] ADD  DEFAULT ((0)) FOR [Activo]
+GO
+ALTER TABLE [dbo].[Categoriasecundaria] ADD  DEFAULT ((0)) FOR [Activo]
+GO
+ALTER TABLE [dbo].[MARCA] ADD  DEFAULT ((0)) FOR [Activo]
+GO
+ALTER TABLE [dbo].[OFERTA] ADD  DEFAULT ((0)) FOR [Activo]
+GO
+ALTER TABLE [dbo].[PRODUCTO] ADD  DEFAULT ((0)) FOR [Precio]
+GO
+ALTER TABLE [dbo].[PROVEEDOR] ADD  DEFAULT ((0)) FOR [Activo]
+GO

@@ -5,21 +5,20 @@ namespace WebApi.Models
 {
     public partial class Ofertum
     {
-        public static OfertumDt BuscaOfertaID(int id)
-        {
-            SOAPLATANITOSContext db = new SOAPLATANITOSContext();
-            Ofertum ofertum = db.Oferta.Find(id);
-            OfertumDt ofertumdt = new OfertumDt();
-            ofertumdt.IdOferta = ofertumdt.IdOferta;
-            ofertumdt.NomOferta = ofertumdt.NomOferta;
-            ofertumdt.IdCategoria = ofertumdt.IdCategoria;
-            ofertumdt.NomCategoria = ofertumdt.NomCategoria;
-            ofertumdt.IdProducto = ofertumdt.IdProducto;
-            ofertumdt.NomProducto = ofertumdt.NomProducto;
-            ofertumdt.Descuento = ofertumdt.Descuento;
-
-            return ofertumdt;
-        }
+        //public static OfertumDt BuscaOfertaID(int IdOferta)
+        //{
+        //    SOAPLATANITOSContext db = new SOAPLATANITOSContext();
+        //    Ofertum ofertum = db.Oferta.Find(IdOferta);
+        //    OfertumDt ofertumdt = new OfertumDt();
+        //    ofertumdt.IdOferta = ofertumdt.IdOferta;
+        //    ofertumdt.NomOferta = ofertumdt.NomOferta;
+        //    ofertumdt.IdCategoria = ofertumdt.IdCategoria;
+        //    ofertumdt.NomCategoria = ofertumdt.NomCategoria;
+        //    ofertumdt.IdProducto = ofertumdt.IdProducto;
+        //    ofertumdt.NomProducto = ofertumdt.NomProducto;
+        //    ofertumdt.Descuento = ofertumdt.Descuento;
+        //    return ofertumdt;
+        //}
 
         public static OfertumDt ObtenOferta(int id)
         {
@@ -33,7 +32,8 @@ namespace WebApi.Models
             NomCategoria = b.NomCategoria,
             IdProducto = b.IdProducto,
             NomProducto = b.NomProducto,
-            Descuento = b.Descuento
+            Descuento = b.Descuento,
+            Activo = b.Activo
         }).SingleOrDefault(b => b.IdOferta == id);
             if (obj == null) obj = new OfertumDt() { IdOferta = 0, NomOferta = "" };
             return obj;
@@ -55,16 +55,14 @@ namespace WebApi.Models
                     NomCategoria = oferta.NomCategoria,
                     IdProducto = oferta.IdProducto,
                     NomProducto = oferta.NomProducto,
-                    Descuento = oferta.Descuento
-
-                 });
+                    Descuento = oferta.Descuento,
+                    Activo = oferta.Activo
+                });
 
             }
             return lista;
 
         }
-
-
 
         public static OfertumDt AgregarOferta(OfertumDt ofertumDt)
         {
@@ -72,15 +70,17 @@ namespace WebApi.Models
             Ofertum ofertum = new Ofertum()
             {
                 NomOferta = ofertumDt.NomOferta,
+                IdCategoria = ofertumDt.IdCategoria,
                 NomCategoria = ofertumDt.NomCategoria,
+                IdProducto = ofertumDt.IdProducto,
                 NomProducto = ofertumDt.NomProducto,
+                Activo = ofertumDt.Activo,
                 Descuento = ofertumDt.Descuento
             };
 
             db.Oferta.Add(ofertum);
             db.SaveChanges();
             return Ofertum.ObtenOferta(ofertum.IdOferta);
-
         }
 
         public static OfertumDt ActualizaOferta(int id, OfertumDt ofertumDt) {
@@ -92,6 +92,8 @@ namespace WebApi.Models
             ofertum.IdProducto = ofertumDt.IdProducto;
             ofertum.NomProducto = ofertumDt.NomProducto;
             ofertum.Descuento = ofertumDt.Descuento;
+            ofertum.Activo = ofertumDt.Activo;
+
             db.Entry(ofertum).State = EntityState.Modified;
             db.SaveChanges();
             return Ofertum.ObtenOferta(ofertum.IdOferta);

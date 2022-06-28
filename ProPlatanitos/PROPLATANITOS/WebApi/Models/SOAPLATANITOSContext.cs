@@ -16,9 +16,11 @@ namespace WebApi.Models
         {
         }
 
+        public virtual DbSet<Categoriasecundarium> Categoriasecundaria { get; set; } = null!;
         public virtual DbSet<Categorium> Categoria { get; set; } = null!;
         public virtual DbSet<Codigop> Codigops { get; set; } = null!;
         public virtual DbSet<Documento> Documentos { get; set; } = null!;
+        public virtual DbSet<Marca> Marcas { get; set; } = null!;
         public virtual DbSet<Ofertum> Oferta { get; set; } = null!;
         public virtual DbSet<Producto> Productos { get; set; } = null!;
         public virtual DbSet<Proveedor> Proveedors { get; set; } = null!;
@@ -35,14 +37,34 @@ namespace WebApi.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Categoriasecundarium>(entity =>
+            {
+                entity.HasKey(e => e.IdSubCategoria)
+                    .HasName("PK__Categori__0A1EFFE5AACAA169");
+
+                entity.Property(e => e.Activo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Categorium>(entity =>
             {
                 entity.HasKey(e => e.IdCategoria)
-                    .HasName("PK__CATEGORI__A3C02A101A40BD21");
+                    .HasName("PK__CATEGORI__A3C02A104391A32C");
 
                 entity.ToTable("CATEGORIA");
 
-                entity.Property(e => e.Activo).HasDefaultValueSql("((0))");
+                entity.Property(e => e.Activo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Descripcion)
                     .HasMaxLength(100)
@@ -56,7 +78,7 @@ namespace WebApi.Models
             modelBuilder.Entity<Codigop>(entity =>
             {
                 entity.HasKey(e => e.IdCodigop)
-                    .HasName("PK__CODIGOP__1F0E02E6841DD3DE");
+                    .HasName("PK__CODIGOP__1F0E02E6ED0C15C9");
 
                 entity.ToTable("CODIGOP");
 
@@ -72,7 +94,7 @@ namespace WebApi.Models
             modelBuilder.Entity<Documento>(entity =>
             {
                 entity.HasKey(e => e.IdDocumento)
-                    .HasName("PK__DOCUMENT__E5207347198AF76E");
+                    .HasName("PK__DOCUMENT__E5207347366EE909");
 
                 entity.ToTable("DOCUMENTO");
 
@@ -85,14 +107,36 @@ namespace WebApi.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Marca>(entity =>
+            {
+                entity.HasKey(e => e.IdMarca)
+                    .HasName("PK__MARCA__4076A88784031465");
+
+                entity.ToTable("MARCA");
+
+                entity.Property(e => e.Activo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Descripcion)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<Ofertum>(entity =>
             {
                 entity.HasKey(e => e.IdOferta)
-                    .HasName("PK__OFERTA__5420E1DA5433F3BC");
+                    .HasName("PK__OFERTA__5420E1DAC2A87CC7");
 
                 entity.ToTable("OFERTA");
 
-                entity.Property(e => e.Activo).HasDefaultValueSql("((0))");
+                entity.Property(e => e.Activo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Descuento).HasColumnType("decimal(10, 2)");
 
@@ -112,7 +156,7 @@ namespace WebApi.Models
             modelBuilder.Entity<Producto>(entity =>
             {
                 entity.HasKey(e => e.IdProducto)
-                    .HasName("PK__PRODUCTO__09889210668A65DA");
+                    .HasName("PK__PRODUCTO__09889210517FE45E");
 
                 entity.ToTable("PRODUCTO");
 
@@ -124,19 +168,19 @@ namespace WebApi.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Precio)
-                    .HasColumnType("decimal(10, 2)")
-                    .HasDefaultValueSql("((0))");
+                entity.Property(e => e.Precio).HasColumnType("decimal(10, 2)");
             });
 
             modelBuilder.Entity<Proveedor>(entity =>
             {
                 entity.HasKey(e => e.IdProveedor)
-                    .HasName("PK__PROVEEDO__E8B631AFEBAF0C8D");
+                    .HasName("PK__PROVEEDO__E8B631AF93D90D63");
 
                 entity.ToTable("PROVEEDOR");
 
-                entity.Property(e => e.Activo).HasDefaultValueSql("((0))");
+                entity.Property(e => e.Activo)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Ciudad)
                     .HasMaxLength(100)
@@ -168,7 +212,7 @@ namespace WebApi.Models
             modelBuilder.Entity<Usuario>(entity =>
             {
                 entity.HasKey(e => e.IdUsuario)
-                    .HasName("PK__USUARIO__5B65BF97E12F6984");
+                    .HasName("PK__USUARIO__5B65BF97089D55B3");
 
                 entity.ToTable("USUARIO");
 
