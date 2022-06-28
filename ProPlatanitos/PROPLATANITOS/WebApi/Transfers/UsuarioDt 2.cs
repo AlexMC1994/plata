@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace WebApi.Models
+﻿namespace WebApi.Transfers
 {
-    public partial class Usuario
+    public class UsuarioDt2
     {
         public int IdUsuario { get; set; }
         public string? Nombre { get; set; }
@@ -14,6 +11,8 @@ namespace WebApi.Models
         public string? NumeroDocumento { get; set; }
         public string? CodigoPais { get; set; }
         public int? Telefono { get; set; }
+
+        public ICollection<UsuarioDt> UsuarioDt { get; set; }
 
     }
 }

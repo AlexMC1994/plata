@@ -5,7 +5,7 @@ namespace WebApi.Models
 {
     public partial class Documento
     {
-        public static DocumentoDt Obtener(int id) {
+        public static DocumentoDt ObtenerDocId(int id) {
             SOAPLATANITOSContext db = new SOAPLATANITOSContext();
             Documento documento = db.Documentos.Find(id);
             DocumentoDt documentodt = new DocumentoDt();
@@ -14,6 +14,29 @@ namespace WebApi.Models
             documentodt.Descripcion = documento.Descripcion;
             return documentodt;
         }
+
+
+        public static ICollection<DocumentoDt> ListaDoc()
+        {
+            ICollection<DocumentoDt> lista = new List<DocumentoDt>();
+            SOAPLATANITOSContext db = new SOAPLATANITOSContext();
+            foreach (Documento documento in db.Documentos.ToList())
+            {
+                lista.Add(new DocumentoDt()
+                {
+                    IdDocumento = documento.IdDocumento,
+                    TipoDocumento = documento.TipoDocumento,
+                    Descripcion = documento.Descripcion
+
+                });
+
+            }
+            return lista;
+
+        }
+
+
+
 
     }
 }

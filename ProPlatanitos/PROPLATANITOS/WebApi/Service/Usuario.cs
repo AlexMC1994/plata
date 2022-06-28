@@ -5,7 +5,8 @@ namespace WebApi.Models
 {
     public partial class Usuario
     {
-        public static UsuarioDt ObtenerUsuario(int id) {
+        public static UsuarioDt ObtenerUsuarioId(int id)
+        {
             SOAPLATANITOSContext db = new SOAPLATANITOSContext();
             Usuario usuario = db.Usuarios.Find(id);
             UsuarioDt usuariodt = new UsuarioDt();
@@ -21,47 +22,47 @@ namespace WebApi.Models
             return usuariodt;
         }
 
-        public static UsuarioDt Registro(int id, ICollection<int> listausuario)
+        public static UsuarioDt Obten(int id)
+        {
+            SOAPLATANITOSContext db = new SOAPLATANITOSContext();
+            var obj = db.Usuarios.Select(b =>
+            new UsuarioDt()
+            {
+                IdUsuario = b.IdUsuario,
+                Nombre = b.Nombre,
+                Apellido = b.Apellido,
+                Correo = b.Correo,
+                Clave = b.Clave,
+                TipoDocumento = b.TipoDocumento,
+                NumeroDocumento = b.NumeroDocumento,
+                CodigoPais = b.CodigoPais,
+                Telefono = b.Telefono
+            }).SingleOrDefault(b => b.IdUsuario == id);
+            if(obj == null) obj = new UsuarioDt() { IdUsuario = 0, Nombre= ""};
+            return obj;
+
+        }
+
+
+        public static UsuarioDt Registro(UsuarioDt usuarioDt)
         {
            SOAPLATANITOSContext db = new SOAPLATANITOSContext();
-            Usuario usuarios = db.Usuarios.Find(id);
-            //UsuarioDt usuarioI = new UsuarioDt();
-            //usuarioI.IdUsuario = IdUsuario;
-            //usuarioI.Nombre = Nombre;
-            //usuarioI.Apellido = Apellido;
-            //usuarioI.Correo = Correo;
-            //usuarioI.Clave = Clave;
-            //usuarioI.TipoDocumento = TipoDocumento;
-            //usuarioI.NumeroDocumento = NumeroDocumento;
-            //usuarioI.CodigoPais = CodigoPais;
-            //usuarioI.Telefono = Telefono;
+           Usuario usuario = new Usuario()
+           {
+            Nombre = usuarioDt.Nombre,
+            Apellido = usuarioDt.Apellido,
+            Correo = usuarioDt.Correo,
+            Clave = usuarioDt.Clave,
+            TipoDocumento = usuarioDt.TipoDocumento,
+            NumeroDocumento = usuarioDt.NumeroDocumento,
+            CodigoPais = usuarioDt.CodigoPais,
+            Telefono = usuarioDt.Telefono
+        };
 
-            //usuario.Usuarios.Add(usuarioI);
-            //db.SaveChanges();
+             db.Usuarios.Add(usuario);
+             db.SaveChanges();
 
-            //return ObtenerUsuario(usuarioI);
-
-            foreach (int i in listausuario)
-            {
-                int cant = db.Usuarios.Where(a => a.IdUsuario == id && a.Usuarios.Count(b => b.IdUsuario == i)>0).Count();
-                if (cant != 0)
-                {
-                    Usuario usuario = db.Usuarios.Find(i);
-
-                    //usuario.Nombre = db.Usuarios.Find(i);
-                    //usuario.Apellido = Apellido;
-                    //usuario.Correo = Correo;
-                    //usuario.Clave = Clave;
-                    //usuario.TipoDocumento = TipoDocumento;
-                    //usuario.NumeroDocumento = NumeroDocumento;
-                    //usuario.CodigoPais = CodigoPais;
-                    //usuario.Telefono = Telefono;
-
-                    usuario.Usuarios.Add(usuario);
-                    db.SaveChanges();
-                }
-            }
-            return ObtenerUsuario(id);
+            return Usuario.Obten(usuario.IdUsuario);  // opcion return usuarioDt
         }
     }
 }
