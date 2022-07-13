@@ -4,10 +4,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors (options =>
 {
-    options.AddPolicy (name: "" , 
+    options.AddPolicy (name: "WEBVUE" , 
         builder =>
     {
-        builder.WithOrigins("http://localhost:5111")
+        builder.WithOrigins("http://localhost:5177")
     .AllowAnyMethod()
     .AllowAnyHeader();
     });

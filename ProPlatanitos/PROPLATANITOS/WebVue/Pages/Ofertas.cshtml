@@ -1,0 +1,210 @@
+﻿@page
+@model WebVue.Pages.OfertasModel
+@{
+}
+<h1> Ofertas Platanitos</h1>
+<p>Esta pagina permitirá manejar de manera correcta las ofertas</p> 
+<div id="app">
+    <p>
+        <button class="btn btn-primary" @@click="nuevo">Nuevo</button>
+        <button class="btn btn-info" @@click="listacate">Lista Documentos</button>
+
+
+   </p>  <!--INICIA LA LISTA DE OFERTAS-->
+    <table class="table"> 
+        <thead>
+            <tr>
+                <th>Id Oferta</th>
+                <th>Oferta</th>
+                <th>Id Categoria</th>
+                <th>Categoria</th>
+                <th>Id Producto</th>
+                <th>Producto</th>
+                <th>Descuento</th>
+                <th>Activo</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in ofertas">
+                <td>{{item.idOferta}}</td>
+	            <td>{{item.nomOferta}}</td>
+	            <td>{{item.idCategoria}}</td>
+	            <td>{{item.nomCategoria}}</td>
+	            <td>{{item.idProducto}}</td>
+	            <td>{{item.nomProducto}}</td>
+	            <td>{{item.descuento}}</td>
+	            <td>{{item.activo}}</td>
+                 <td> 
+                     <button class="btn btn-primary" @@click="editar(item.idOferta)">Editar</button>
+                     <button class="btn btn-danger" @@click="eliminar(item.idOferta)">Eliminar</button>
+                 </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--MODAL PARA NUEVO, EDITAR OFERTAS -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="mdlOferta" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registro de Oferta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body"> 
+                  <p>nomOferta:    <input v-model="ofert.nomOferta"/></p>
+                  <p>idCategoria:  <input v-model="ofert.idCategoria"/></p>
+                  <p>nomCategoria: <input v-model="ofert.nomCategoria"/></p>
+                  <p>idProducto:   <input v-model="ofert.idProducto"/></p>
+                  <p>nomProducto:  <input v-model="ofert.nomProducto" /></p>
+                  <p>descuento:    <input  v-model="ofert.descuento"/></p>
+                  <p>activo:       <input  v-model="ofert.activo"/></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" v-if="botonnuevo==false" @@click="actualizar">Actualizar</button>
+                <button type="button" class="btn btn-primary" v-if="botonnuevo==true" @@click="registrar">Registrar</button>
+               <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrar">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--MODAL PARA LISTAR LAS CATEGORIAS-->
+        <div class="modal fade" tabindex="-1" role="dialog" id="mdlCategoria" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lista de Categoria</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrarc">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body"> 
+                       <table class="table"> 
+        <thead>
+            <tr>
+                <th>Id Codigo</th>
+                <th>Nombre de Categoria</th>
+                <th>Descripcion</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in categorias">
+                <td>{{item.idCategoria}}</td>
+	            <td>{{item.nombre}}</td>
+	            <td>{{item.descripcion}}</td>
+                <td>{{item.activo}}</td>
+            </tr>
+        </tbody>
+    </table>
+              </div>
+              <div class="modal-footer">
+               <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrarc">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+    </div>
+
+
+<script src="https://unpkg.com/vue@2"></script> 
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
+
+
+<script>
+    new Vue({
+        el: "#app", //para sincronizar
+        data: { //para los datos y demas
+           ofert: {
+                idOferta:0,
+	            nomOferta:"",
+	            idCategoria:"",
+	            nomCategoria:"",
+	            idProducto:"",
+	            nomProducto:"",
+	            descuento:"",
+	            activo:""
+            },   
+            
+            ofertas: [],
+            categorias: [],
+            botonnuevo: true
+        },
+
+        mounted: function() {
+            this.buscar();
+        },
+
+        methods: {
+            buscar: function() {
+                var url = "http://localhost:5213/api/Oferta/ListaOferta";
+                this.$http.get(url).then(function(response) {
+                    this.ofertas = response.body;
+                });
+            },
+
+            eliminar: function(idOferta) {
+               var url = "http://localhost:5213/api/Oferta/Eliminar?IdOferta="+idOferta;
+               this.$http.delete(url).then(function(response) {
+                   this.buscar();
+                });
+            },
+
+             nuevo: function() {
+                 this.botonnuevo = true;
+              $('#mdlOferta').modal('show');
+            },
+
+             registrar: function() {
+               var url = "http://localhost:5213/api/Oferta/AgregarOferta";
+               this.$http.post(url, this.ofert).then(function(response) {
+                   this.buscar();
+                    $('#mdlOferta').modal('hide');
+                });
+            },
+
+             editar: function (IdOferta) {
+                this.botonnuevo = false;
+                var url = "http://localhost:5213/api/Oferta/BuscaOfertaID?IdOferta=" + IdOferta;
+                this.$http.get(url).then(function (response) {
+                    this.ofert = response.body;
+                    $('#mdlOferta').modal('show');
+                });
+            },
+
+            actualizar: function () {
+                var url = "http://localhost:5213/api/Oferta/ActualizaOferta?id=" + this.ofert.idOferta;
+                this.$http.put(url, this.ofert).then(function (response) {
+                    this.buscar();
+                    $('#mdlOferta').modal('hide');
+                });
+            },
+
+             cerrar: function() {
+              $('#mdlOferta').modal('hide');
+            },
+
+
+             cerrarc: function() {
+              $('#mdlCategoria').modal('hide');
+            },
+
+            listacate: function(){
+                var url = "http://localhost:5213/api/Oferta/ListarCategoria"; 
+                this.$http.get(url).then(function(response) {
+                     this.categorias = response.body;
+                     $('#mdlCategoria').modal('show');
+                  });
+               }
+
+
+        }
+    })
+
+</script>

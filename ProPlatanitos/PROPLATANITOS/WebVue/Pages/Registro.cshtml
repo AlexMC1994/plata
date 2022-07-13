@@ -1,0 +1,245 @@
+﻿@page
+@model WebVue.Pages.RegistroModel
+@{
+}
+<h1> Registro de Usuarios</h1>
+<p>Esta pagina permitirá registrar nuevos usuarios</p>
+<div id="app">
+    <p>
+         <button class="btn btn-primary" @@click="nuevo">Nuevo</button>  
+         <button class="btn btn-info" @@click="listadni">Lista Documentos</button>
+         <button class="btn btn-info" @@click="listapais">Lista Codigos</button>
+    </p>
+    <table class="table"> 
+        <thead>
+            <tr>
+                <th>Id Usuario</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Corrreo</th>
+                <th>Clave</th>
+                <th>Tipo Doc</th>
+                <th>Numero de Documento</th>
+                <th>Codigo de Pais</th>
+                <th>Telefono</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in usuarios">
+                <td>{{item.idUsuario}}</td>
+	            <td>{{item.nombre}}</td>
+	            <td>{{item.apellido}}</td>
+	            <td>{{item.correo}}</td>
+	            <td>{{item.clave}}</td>
+	            <td>{{item.tipoDocumento}}</td>
+	            <td>{{item.numeroDocumento}}</td>
+	            <td>{{item.codigoPais}}</td>
+                <td>{{item.telefono}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+        <div class="modal" tabindex="-1" role="dialog" id="mdlUsuario">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Registro de Usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body"> 
+                  <p>Nombre:   <br /> <input v-model="usua.nombre"/></p>
+                  <p>Apellido: <br /> <input  v-model="usua.apellido"/></p>
+                  <p>Correo: <br /> <input  v-model="usua.correo"/></p>
+                  <p>Clave:   <br /><input  v-model="usua.clave"/></p>
+                  <p>Tipo Documento:</p>
+                            <select v-model="usua.tipoDocumento">
+                                <option>Seleccionar...</option>
+                                <option value="DNI">DNI</option>
+                                <option value="CE">Car Extranjeria</option>
+                                <option value="PAS">Pasaporte</option>
+                            </select>
+                  <p>Numero Documento: <br /> <input v-model="usua.numeroDocumento" /></p>                   
+                   <p>Codigo de Pais:</p>
+                            <select v-model="usua.codigoPais">
+                                <option>Seleccionar...</option>
+                                <option value="+51">Perú</option>
+                                <option value="+34">España</option>
+                                <option value="+46">Suecia</option>
+                                <option value="+86">China</option>
+                            </select>
+                  <p>Telefono:       <br /><input  v-model="usua.telefono"/></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-primary" @@click="registrar">Registrar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrar">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+         <div class="modal" tabindex="-1" role="dialog" id="mdlDoc">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Lista de Documentos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrad">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body"> 
+     <table class="table"> 
+        <thead>
+            <tr>
+                <th>Id Documento</th>
+                <th>Tipo Documento</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in documentos">
+                <td>{{item.idDocumento}}</td>
+	            <td>{{item.tipoDocumento}}</td>
+	            <td>{{item.descripcion}}</td>
+            </tr>
+        </tbody>
+    </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrad">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="mdlCodp">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Lista de Documentos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrarp">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body"> 
+     <table class="table"> 
+        <thead>
+            <tr>
+                <th>Id Codigo</th>
+                <th>Codigo de Pais</th>
+                <th>Descripcion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in pais">
+                <td>{{item.idCodigop}}</td>
+	            <td>{{item.codigopais}}</td>
+	            <td>{{item.descripcion}}</td>
+            </tr>
+        </tbody>
+    </table>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrarp">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+    </div>
+
+
+
+
+<script src="https://unpkg.com/vue@2"></script> 
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
+
+
+<script>
+    new Vue({
+        el: "#app", 
+        data: { 
+           usuarios: [],
+           usua: {
+                idUsuario:0,
+	            nombre:"",
+	            apellido:"",
+	            correo:"",
+	            clave:"",
+	            tipoDocumento:"",
+	            codigoPais:"",
+	            telefono:""
+            },
+
+               docu: {
+                idDocumento:0,
+	            tipoDocumento:"",
+	            descripcion:""
+            },
+            documentos: [],
+            pais: []
+        },
+
+        mounted: function() {
+            this.buscar();
+        },
+
+        methods: {
+            buscar: function() {
+                var url = "http://localhost:5213/api/Registro/ListaUsuario";
+                this.$http.get(url).then(function(response) {
+                    this.usuarios = response.body;
+                });
+            },
+
+
+             nuevo: function() {
+              $('#mdlUsuario').modal('show');
+            },
+
+             registrar: function() {
+               var url = "http://localhost:5213/api/Registro/Registro";
+               this.$http.post(url, this.usua).then(function(response) {
+                   this.buscar();
+                    $('#mdlUsuario').modal('hide');
+                });
+            },
+
+               cerrar: function(){
+                   $('#mdlUsuario').modal('hide');
+               },
+
+               cerrad: function(){
+                   $('#mdlDoc').modal('hide');
+               },
+
+               cerrarp: function(){
+                   $('#mdlCodp').modal('hide');
+               },
+
+
+               listadni: function(){
+                   var url = "http://localhost:5213/api/Registro/ListaDoc";
+                   this.$http.get(url).then(function(response) {
+                       this.documentos = response.body;
+                       $('#mdlDoc').modal('show');
+                   });
+               },
+
+               listapais: function(){
+                   var url = "http://localhost:5213/api/Registro/ListaCodigo"; 
+                   this.$http.get(url).then(function(response) {
+                       this.pais = response.body;
+                       $('#mdlCodp').modal('show');
+                   });
+               }
+
+
+        }
+    })
+
+</script>

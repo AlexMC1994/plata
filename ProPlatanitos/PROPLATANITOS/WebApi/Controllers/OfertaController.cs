@@ -6,7 +6,7 @@ using WebApi.Transfers;
 
 namespace WebApi.Controllers
 {
-    [EnableCors("api/[controller]")]
+    [EnableCors("WEBVUE")]
     [Route("api/[controller]")]
     [ApiController]
     public class OfertaController : ControllerBase

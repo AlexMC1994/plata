@@ -43,6 +43,30 @@ namespace WebApi.Models
 
         }
 
+        public static ICollection<UsuarioDt> ListaUsuario()
+        {
+            ICollection<UsuarioDt> lista = new List<UsuarioDt>();
+            SOAPLATANITOSContext db = new SOAPLATANITOSContext();
+            foreach (Usuario usuario in db.Usuarios.ToList())
+            {
+                lista.Add(new UsuarioDt()
+                {
+                    IdUsuario = usuario.IdUsuario,
+                    Nombre = usuario.Nombre,
+                    Apellido = usuario.Apellido,
+                    Correo = usuario.Correo,
+                    Clave = usuario.Clave,
+                    TipoDocumento = usuario.TipoDocumento,
+                    NumeroDocumento = usuario.NumeroDocumento,
+                    CodigoPais = usuario.CodigoPais,
+                    Telefono = usuario.Telefono
+
+             });
+
+            }
+            return lista;
+
+        }
 
         public static UsuarioDt Registro(UsuarioDt usuarioDt)
         {
@@ -64,5 +88,6 @@ namespace WebApi.Models
 
             return Usuario.Obten(usuario.IdUsuario);  // opcion return usuarioDt
         }
+
     }
 }

@@ -6,7 +6,7 @@ using WebApi.Transfers;
 
 namespace WebApi.Controllers
 {
-    [EnableCors("api/[controller]")]
+    [EnableCors("WEBVUE")]
     [Route("api/[controller]")]
     [ApiController]
     public class RegistroController : ControllerBase
@@ -46,6 +46,13 @@ namespace WebApi.Controllers
         public UsuarioDt ObtenerUsuarioId(int id)
         {
             return Usuario.ObtenerUsuarioId(id);
+        }
+
+        [HttpGet]
+        [Route("ListaUsuario")]
+        public ICollection<UsuarioDt> ListaUsuario()
+        {
+            return Usuario.ListaUsuario();
         }
 
         [HttpPost]

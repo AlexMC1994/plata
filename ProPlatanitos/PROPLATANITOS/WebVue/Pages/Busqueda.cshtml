@@ -1,0 +1,31 @@
+﻿@page
+@model WebVue.Pages.BusquedaModel
+@{
+}
+
+<h1> Busqueda de Ofertas</h1>
+<p>Esta pagina permitirá hacer busqueda de ofertas presentes</p>
+<div id="app">
+    <p><button @@click="buscar">Buscar</button> </p>
+</div>
+
+<script src="https://unpkg.com/vue@2"></script> 
+<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.3"></script>
+
+
+<script>
+    new Vue({
+        el: "#app", //para sincronizar
+        data: { //para los datos y demas
+            nombres: "Juan Luis",
+            apellidos: "Vargas"
+        },
+
+        methods: {
+            buscar: function() {
+                this.nombres = "San Juan";
+            }
+        }
+    })
+
+</script>
