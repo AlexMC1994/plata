@@ -9,8 +9,8 @@
          <button class="btn btn-primary" @@click="nuevo">Nuevo</button>  
          <button class="btn btn-info" @@click="listadni">Lista Documentos</button>
          <button class="btn btn-info" @@click="listapais">Lista Codigos</button>
-    </p>
-    <table class="table"> 
+    </p> <!--INICIA LISTA DE USUARIOS-->
+    <table class="table table-bordered  table-hover table-secondary"> 
         <thead>
             <tr>
                 <th>Id Usuario</th>
@@ -39,7 +39,7 @@
         </tbody>
     </table>
 
-
+    <!--MODAL PARA REGISTRAR USUARIO -->
         <div class="modal" tabindex="-1" role="dialog" id="mdlUsuario">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -50,10 +50,10 @@
                 </button>
               </div>
               <div class="modal-body"> 
-                  <p>Nombre:   <br /> <input v-model="usua.nombre"/></p>
-                  <p>Apellido: <br /> <input  v-model="usua.apellido"/></p>
-                  <p>Correo: <br /> <input  v-model="usua.correo"/></p>
-                  <p>Clave:   <br /><input  v-model="usua.clave"/></p>
+                  <p>Nombre:   <br /> <input v-model="usua.nombre" placeholder="Ingrese su nombre"/></p>
+                  <p>Apellido: <br /> <input  v-model="usua.apellido" placeholder="Ingrese su apellido"/></p>
+                  <p>Correo: <br /> <input  v-model="usua.correo" placeholder="Ingresa tu correo electrónico"/></p>
+                  <p>Clave:   <br /><input  v-model="usua.clave" placeholder="Ingresa tu contraseña"/></p>
                   <p>Tipo Documento:</p>
                             <select v-model="usua.tipoDocumento">
                                 <option>Seleccionar...</option>
@@ -61,7 +61,7 @@
                                 <option value="CE">Car Extranjeria</option>
                                 <option value="PAS">Pasaporte</option>
                             </select>
-                  <p>Numero Documento: <br /> <input v-model="usua.numeroDocumento" /></p>                   
+                  <p>Numero Documento: <br /> <input v-model="usua.numeroDocumento" placeholder="Ingresa tu documento de identidad"/></p>                   
                    <p>Codigo de Pais:</p>
                             <select v-model="usua.codigoPais">
                                 <option>Seleccionar...</option>
@@ -70,17 +70,17 @@
                                 <option value="+46">Suecia</option>
                                 <option value="+86">China</option>
                             </select>
-                  <p>Telefono:       <br /><input  v-model="usua.telefono"/></p>
+                  <p>Telefono: <br /><input  v-model="usua.telefono" placeholder="Ingresa tu teléfono"/></p>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-primary" @@click="registrar">Registrar</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrar">Close</button>
+                <button type="button" class="btn btn-rounded btn-primary" @@click="registrar">Registrar</button>
+                <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal" @@click="cerrar">Close</button>
               </div>
             </div>
           </div>
         </div>
 
-
+        <!--MODAL PARA LISTAR LOS TIPOS DE DOCUMENTO-->
          <div class="modal" tabindex="-1" role="dialog" id="mdlDoc">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -91,7 +91,7 @@
                 </button>
               </div>
               <div class="modal-body"> 
-     <table class="table"> 
+     <table class="table table-hover"> 
         <thead>
             <tr>
                 <th>Id Documento</th>
@@ -114,18 +114,18 @@
             </div>
           </div>
         </div>
-
+        <!-- MODAL PARA LOS CODIGOS DE PAIS-->
         <div class="modal" tabindex="-1" role="dialog" id="mdlCodp">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Lista de Documentos</h5>
+                <h5 class="modal-title">Lista de Codigos de País</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrarp">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body"> 
-     <table class="table"> 
+     <table class="table table-hover"> 
         <thead>
             <tr>
                 <th>Id Codigo</th>
@@ -241,5 +241,6 @@
 
         }
     })
+
 
 </script>

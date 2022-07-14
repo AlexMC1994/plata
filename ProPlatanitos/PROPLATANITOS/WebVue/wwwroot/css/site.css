@@ -15,4 +15,24 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color:lightgray;
 }
+
+header {
+    margin-bottom: 60px;
+    background-color: lightgreen;
+}
+
+div1 {
+    height: 80px;
+    width: 100%;
+    background-color: red;
+    justify-content: center;
+    align-content: center;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+

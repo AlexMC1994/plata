@@ -15,10 +15,6 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\SOA\PROYECTO\PLATANITOS\ProPlatanitos\PROPLATANITOS\WebVue
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/SOA/PROYECTO/PLATANITOS/ProPlatanitos/PROPLATANITOS/WebVue/Pages/Busqueda.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQnVzcXVlZGEuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [D:/SOA/PROYECTO/PLATANITOS/ProPlatanitos/PROPLATANITOS/WebVue/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
