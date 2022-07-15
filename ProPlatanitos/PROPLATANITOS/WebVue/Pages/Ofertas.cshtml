@@ -5,8 +5,11 @@
 <div id="app">
     <h1>Ofertas</h1>
     <p>
+        Id Oferta: <input v-model="idOferta" />
         <button class="btn btn-primary" @@click="nuevo">Nuevo</button>
         <button class="btn btn-info" @@click="listacate">Lista Categorias</button>
+        <button class="btn btn-secondary" @@click="buscar">Buscar</button>
+        <button class="btn btn-info" @@click="listar">Listar</button>
    </p> 
    <!--INICIA LA LISTA DE OFERTAS-->
     <table class="table table-bordered  table-hover table-secondary"> 
@@ -45,22 +48,22 @@
         <div class="modal fade" tabindex="-1" role="dialog" id="mdlOferta" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" id="mdlheader">
                 <h5 class="modal-title" id="exampleModalLabel">Registro de Oferta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrar">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body"> 
-                  <p>Nombre de Oferta:  <br />  <input v-model="ofert.nomOferta" placeholder="Ingrese nombre de oferta" /></p>
-                  <p>Id de Categoria:  <br /><input v-model="ofert.idCategoria" placeholder="Ingrese id de categoria"/></p>
-                  <p>Nombre de Categoria: <br /><input v-model="ofert.nomCategoria" placeholder="Ingrese nombre de categoria"/></p>
-                  <p>Id del Producto:   <br /><input v-model="ofert.idProducto" placeholder="Ingrese id de producto"/></p>
-                  <p>Nombre del Producto:  <br /><input v-model="ofert.nomProducto" placeholder="Ingrese nombre del producto"/></p>
-                  <p>Descuento:    <br /><input  v-model="ofert.descuento" placeholder="Ingrese monto de descuento"/></p>
-                  <p>Activo:       <br /><input  v-model="ofert.activo" placeholder="Ingrese estado de la oferta"/></p>
+              <div class="modal-body" id="mdlbody"> 
+                  <p><b>Nombre de Oferta: </b><br />  <input v-model="ofert.nomOferta" placeholder="Ingrese nombre de oferta" class="form-control input-lg" /></p>
+                  <p><b>Id de Categoria: </b> <br /><input v-model="ofert.idCategoria" placeholder="Ingrese id de categoria" class="form-control input-lg" /></p>
+                  <p><b>Nombre de Categoria:</b> <br /><input v-model="ofert.nomCategoria" placeholder="Ingrese nombre de categoria" class="form-control input-lg" /></p>
+                  <p><b>Id del Producto:  </b> <br /><input v-model="ofert.idProducto" placeholder="Ingrese id de producto" class="form-control input-lg" /></p>
+                  <p><b>Nombre del Producto:</b>  <br /><input v-model="ofert.nomProducto" placeholder="Ingrese nombre del producto" class="form-control input-lg" /></p>
+                  <p><b>Descuento:   </b> <br /><input  v-model="ofert.descuento" placeholder="Ingrese monto de descuento" class="form-control input-lg" /></p>
+                  <p><b>Activo:     </b>  <br /><input  v-model="ofert.activo" placeholder="Ingrese estado de la oferta" class="form-control input-lg" /></p>
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer" id="mdlbotn">
                 <button type="button" class="btn btn-primary" v-if="botonnuevo==false" @@click="actualizar">Actualizar</button>
                 <button type="button" class="btn btn-primary" v-if="botonnuevo==true" @@click="registrar">Registrar</button>
                <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrar">Cerrar</button>
@@ -73,13 +76,13 @@
         <div class="modal fade" tabindex="-1" role="dialog" id="mdlCategoria" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" id="mdlheader">
                 <h5 class="modal-title" id="exampleModalLabel">Lista de Categoria</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrarc">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body"> 
+              <div class="modal-body" id="mdlbody"> 
             <table class="table table-hover" > 
         <thead>
             <tr>
@@ -99,7 +102,7 @@
         </tbody>
     </table>
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer"  id="mdlbotn">
                <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrarc">Cerrar</button>
               </div>
             </div>
@@ -129,18 +132,17 @@
 	            descuento:"",
 	            activo:""
             },   
-            
             ofertas: [],
             categorias: [],
             botonnuevo: true
         },
 
         mounted: function() {
-            this.buscar();
+            this.listar();
         },
 
         methods: {
-            buscar: function() {
+            listar: function() {
                 var url = "http://localhost:5213/api/Oferta/ListaOferta";
                 this.$http.get(url).then(function(response) {
                     this.ofertas = response.body;
@@ -150,26 +152,27 @@
             eliminar: function(idOferta) {
                var url = "http://localhost:5213/api/Oferta/Eliminar?IdOferta="+idOferta;
                this.$http.delete(url).then(function(response) {
-                   this.buscar();
+                   this.listar();
                 });
             },
 
              nuevo: function() {
-                 this.botonnuevo = true;
+              this.botonnuevo = true;
               $('#mdlOferta').modal('show');
+                 this.ofert = {};
             },
 
              registrar: function() {
                var url = "http://localhost:5213/api/Oferta/AgregarOferta";
                this.$http.post(url, this.ofert).then(function(response) {
-                   this.buscar();
+                   this.listar();
                     $('#mdlOferta').modal('hide');
                 });
             },
 
              editar: function (IdOferta) {
                 this.botonnuevo = false;
-                var url = "http://localhost:5213/api/Oferta/BuscaOfertaID?IdOferta=" + IdOferta;
+                var url = "http://localhost:5213/api/Oferta/ObtenOferta?id=" + IdOferta;
                 this.$http.get(url).then(function (response) {
                     this.ofert = response.body;
                     $('#mdlOferta').modal('show');
@@ -179,15 +182,14 @@
             actualizar: function () {
                 var url = "http://localhost:5213/api/Oferta/ActualizaOferta?id=" + this.ofert.idOferta;
                 this.$http.put(url, this.ofert).then(function (response) {
-                    this.buscar();
+                    this.listar();
                     $('#mdlOferta').modal('hide');
                 });
             },
 
-             cerrar: function() {
-              $('#mdlOferta').modal('hide');
-            },
-
+             cerrar: function() { 
+                   $('#mdlOferta').modal('hide');
+              },
 
              cerrarc: function() {
               $('#mdlCategoria').modal('hide');
@@ -199,8 +201,15 @@
                      this.categorias = response.body;
                      $('#mdlCategoria').modal('show');
                   });
-               }
+               },
 
+               buscar: function(){
+                   var url = "http://localhost:5213/api/Oferta/ObtenOferta?id=" + this.idOferta;
+                   this.$http.get(url).then(function(response) {
+                       this.ofertas = [response.body];
+                       console.log(response);
+                   });
+               }
 
         }
     })

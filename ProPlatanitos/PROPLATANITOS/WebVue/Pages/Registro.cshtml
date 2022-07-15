@@ -6,9 +6,12 @@
 <p>Esta pagina permitirá registrar nuevos usuarios</p>
 <div id="app">
     <p>
+          Buscar Id Usuario <input  v-model="idUsuario"/>
+          <button class="btn btn-secondary" @@click="buscar">Buscar</button>
          <button class="btn btn-primary" @@click="nuevo">Nuevo</button>  
          <button class="btn btn-info" @@click="listadni">Lista Documentos</button>
          <button class="btn btn-info" @@click="listapais">Lista Codigos</button>
+         <button class="btn btn-info" @@click="listar">Listar Usuarios</button>
     </p> <!--INICIA LISTA DE USUARIOS-->
     <table class="table table-bordered  table-hover table-secondary"> 
         <thead>
@@ -43,36 +46,36 @@
         <div class="modal" tabindex="-1" role="dialog" id="mdlUsuario">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" id="mdlheader">
                 <h5 class="modal-title">Registro de Usuario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrar">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body"> 
-                  <p>Nombre:   <br /> <input v-model="usua.nombre" placeholder="Ingrese su nombre"/></p>
-                  <p>Apellido: <br /> <input  v-model="usua.apellido" placeholder="Ingrese su apellido"/></p>
-                  <p>Correo: <br /> <input  v-model="usua.correo" placeholder="Ingresa tu correo electrónico"/></p>
-                  <p>Clave:   <br /><input  v-model="usua.clave" placeholder="Ingresa tu contraseña"/></p>
-                  <p>Tipo Documento:</p>
-                            <select v-model="usua.tipoDocumento">
+              <div class="modal-body" id="mdlbody"> 
+                  <p><b>Nombre:</b>   <br /> <input v-model="usua.nombre" placeholder="Ingrese su nombre"  class="form-control input-lg"/></p>
+                  <p><b>Apellido: </b><br /> <input  v-model="usua.apellido" placeholder="Ingrese su apellido"  class="form-control input-lg"/></p>
+                  <p><b>Correo: </b><br /> <input  v-model="usua.correo" placeholder="Ingresa tu correo electrónico"  class="form-control input-lg"/></p>
+                  <p><b>Clave:   </b><br /><input  v-model="usua.clave" placeholder="Ingresa tu contraseña"  class="form-control input-lg"/></p>
+                  <p><b>Tipo Documento:</b></p>
+                            <select v-model="usua.tipoDocumento"  class="form-control input-lg">
                                 <option>Seleccionar...</option>
                                 <option value="DNI">DNI</option>
                                 <option value="CE">Car Extranjeria</option>
                                 <option value="PAS">Pasaporte</option>
                             </select>
-                  <p>Numero Documento: <br /> <input v-model="usua.numeroDocumento" placeholder="Ingresa tu documento de identidad"/></p>                   
-                   <p>Codigo de Pais:</p>
-                            <select v-model="usua.codigoPais">
+                  <p><b>Numero Documento:</b><br /> <input v-model="usua.numeroDocumento" placeholder="Ingresa tu documento de identidad"  class="form-control input-lg"/></p>                   
+                   <p><b>Codigo de Pais:</b></p>
+                            <select v-model="usua.codigoPais"  class="form-control input-lg">
                                 <option>Seleccionar...</option>
                                 <option value="+51">Perú</option>
                                 <option value="+34">España</option>
                                 <option value="+46">Suecia</option>
                                 <option value="+86">China</option>
                             </select>
-                  <p>Telefono: <br /><input  v-model="usua.telefono" placeholder="Ingresa tu teléfono"/></p>
+                  <p><b>Telefono:</b><br /><input  v-model="usua.telefono" placeholder="Ingresa tu teléfono"  class="form-control input-lg"/></p>
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer" id="mdlbotn">
                 <button type="button" class="btn btn-rounded btn-primary" @@click="registrar">Registrar</button>
                 <button type="button" class="btn btn-rounded btn-danger" data-dismiss="modal" @@click="cerrar">Close</button>
               </div>
@@ -84,13 +87,13 @@
          <div class="modal" tabindex="-1" role="dialog" id="mdlDoc">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" id="mdlheader">
                 <h5 class="modal-title">Lista de Documentos</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrad">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body"> 
+              <div class="modal-body" id="mdlbody"> 
      <table class="table table-hover"> 
         <thead>
             <tr>
@@ -108,7 +111,7 @@
         </tbody>
     </table>
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer" id="mdlbotn">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrad">Close</button>
               </div>
             </div>
@@ -118,13 +121,13 @@
         <div class="modal" tabindex="-1" role="dialog" id="mdlCodp">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
+              <div class="modal-header" id="mdlheader">
                 <h5 class="modal-title">Lista de Codigos de País</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" @@click="cerrarp">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
-              <div class="modal-body"> 
+              <div class="modal-body" id="mdlbody"> 
      <table class="table table-hover"> 
         <thead>
             <tr>
@@ -142,7 +145,7 @@
         </tbody>
     </table>
               </div>
-              <div class="modal-footer">
+              <div class="modal-footer" id="mdlbotn">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" @@click="cerrarp">Close</button>
               </div>
             </div>
@@ -185,11 +188,11 @@
         },
 
         mounted: function() {
-            this.buscar();
+            this.listar();
         },
 
         methods: {
-            buscar: function() {
+            listar: function() {
                 var url = "http://localhost:5213/api/Registro/ListaUsuario";
                 this.$http.get(url).then(function(response) {
                     this.usuarios = response.body;
@@ -199,12 +202,13 @@
 
              nuevo: function() {
               $('#mdlUsuario').modal('show');
+              this.usua = {};
             },
 
              registrar: function() {
                var url = "http://localhost:5213/api/Registro/Registro";
                this.$http.post(url, this.usua).then(function(response) {
-                   this.buscar();
+                   this.listar();
                     $('#mdlUsuario').modal('hide');
                 });
             },
@@ -235,6 +239,14 @@
                    this.$http.get(url).then(function(response) {
                        this.pais = response.body;
                        $('#mdlCodp').modal('show');
+                   });
+               },
+
+                   buscar: function(){
+                   var url = "http://localhost:5213/api/Registro/ObtenerUsuarioId?id=" + this.idUsuario;
+                   this.$http.get(url).then(function(response) {
+                       this.usuarios = [response.body];
+                       console.log(response);
                    });
                }
 

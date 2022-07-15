@@ -18,17 +18,14 @@ body {
   background-color:lightgray;
 }
 
-header {
-    margin-bottom: 60px;
-    background-color: lightgreen;
+#cabheader {
+    width: 100%;
+    background-color: palegreen;
 }
 
-div1 {
-    height: 80px;
+nav{
+    height: 100px;
     width: 100%;
-    background-color: red;
-    justify-content: center;
-    align-content: center;
 }
 .btn-primary {
     color: #fff;
@@ -36,3 +33,13 @@ div1 {
     border-color: #1861ac;
 }
 
+#mdlbody {
+    background-color: lightgrey;
+}
+
+#mdlheader{
+    background-color: lightgrey;
+}
+#mdlbotn{
+    background-color: lightgrey;
+}

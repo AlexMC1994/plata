@@ -21,10 +21,10 @@ namespace WebApi.Controllers
 
 
         [HttpGet]
-        [Route("BuscaOfertaID")]
-        public OfertumDt ObtenOferta(int IdOferta)
+        [Route("ObtenOferta")]
+        public OfertumDt ObtenOferta(int id)
         {
-            return Ofertum.ObtenOferta(IdOferta);
+            return Ofertum.ObtenOferta(id);
         }
 
         [HttpGet]
